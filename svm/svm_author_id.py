@@ -20,10 +20,31 @@ from email_preprocess import preprocess
 features_train, features_test, labels_train, labels_test = preprocess()
 
 
-
-
 #########################################################
 ### your code goes here ###
+
+from sklearn.svm import SVC
+
+#features_train = features_train[:len(features_train)/100]
+#labels_train = labels_train[:len(labels_train)/100]
+
+clf = SVC(C=10000.0, kernel="rbf")
+
+print "Created classifier, fitting"
+
+t0 = time()
+clf.fit(features_train, labels_train)
+print "Fitting:", time() - t0
+
+t0 = time()
+pred = clf.predict(features_test)
+print "Predicting:", time() - t0
+print "Predictions:", pred[10], pred[26], pred[50]
+print "Chris wrote:", sum(pred)
+
+print "Classifier score:", clf.score(features_test, labels_test)
+print
+
 
 #########################################################
 
