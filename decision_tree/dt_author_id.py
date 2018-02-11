@@ -25,6 +25,21 @@ features_train, features_test, labels_train, labels_test = preprocess()
 #########################################################
 ### your code goes here ###
 
+from sklearn.tree import DecisionTreeClassifier as DTC
+
+clf40 = DTC(min_samples_split=40)
+
+print "Features:", len(features_test[0])
+
+t0 = time()
+clf40.fit(features_train, labels_train)
+print "Fitting:", time() - t0
+
+t0 = time()
+pred40 = clf40.predict(features_test)
+print "Predicting:", time() - t0
+
+print "Score:", clf40.score(features_test, labels_test)
 
 #########################################################
 
